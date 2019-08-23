@@ -1,0 +1,895 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/22/2019 8:34:11 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HESHAN-MACBOOK-"
+  DTS:CreatorName="HESHAN-MACBOOK-\Shashila Heshan"
+  DTS:DTSID="{70ABFB99-F3F9-44AB-B16E-C1CA7B1C36F6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.5026.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Conditional data sending"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{290C04C1-B04B-45DD-9144-5811F3F95C70}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HESHAN-MACBOOK-.Student]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E54F6C07-17E8-4F85-B187-713ECF9A943C}"
+      DTS:ObjectName="HESHAN-MACBOOK-.Student">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HESHAN-MACBOOK-;Initial Catalog=Student;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Conditional Data sending()"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{AC50D718-4744-4385-B222-F29DD6ED30FB}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Conditional Data sending()"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Conditional Data sending()\Check salary&lt;100000 or not"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Check salary&lt;100000 or not"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Inputs[Conditional Split Input].Columns[salary]"
+                      cachedDataType="r8"
+                      cachedName="salary"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[salary]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Case 1]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Case 1"
+                  synchronousInputId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[salary]} &lt; 100000.00</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">salary &lt; 100000.00</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Case 2]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Case 2"
+                  synchronousInputId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[salary]} &gt;= 100000.00</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">salary &gt;= 100000.00</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[salary_condition]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="salary_condition"
+                  synchronousInputId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Conditional Data sending()\Conditional data sending()"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Conditional data sending()"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Student]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Conditional Data sending()\Conditional data sending().Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HESHAN-MACBOOK-.Student]"
+                  connectionManagerRefId="Package.ConnectionManagers[HESHAN-MACBOOK-.Student]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      precision="18"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="50"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[address]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[address]"
+                      length="50"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[address]"
+                      name="address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[mobile]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[mobile]"
+                      length="50"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[mobile]"
+                      name="mobile"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[salary]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[salary]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[salary]"
+                      name="salary"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="numeric"
+                      name="id"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="address" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[mobile]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="mobile" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].ExternalColumns[salary]"
+                      dataType="r8"
+                      name="salary" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="numeric"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id"
+                      precision="18" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[address]"
+                      name="address" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[mobile]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[mobile]"
+                      name="mobile" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[salary]"
+                      dataType="r8"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[salary]"
+                      name="salary" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Conditional Data sending()\Salary above 100000 students"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Salary above 100000 students"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[salary_above_100000_students]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Conditional Data sending()\Salary above 100000 students.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HESHAN-MACBOOK-.Student]"
+                  connectionManagerRefId="Package.ConnectionManagers[HESHAN-MACBOOK-.Student]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="numeric"
+                      cachedName="id"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].Columns[name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].Columns[address]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="address"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[address]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[address]" />
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].Columns[mobile]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="mobile"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[mobile]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[mobile]" />
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].Columns[salary]"
+                      cachedDataType="r8"
+                      cachedName="salary"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[salary]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="numeric"
+                      name="id"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="address" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[mobile]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="mobile" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      dataType="r8"
+                      name="salary" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Conditional Data sending()\Salary above 100000 students.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Conditional Data sending()\Salary above 100000 students.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Salary above 100000 students.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Conditional Data sending()\Salary above 100000 students.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Conditional Data sending()\Salary below 100000 students"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Salary below 100000 students"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[salary_below_100000_students]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Conditional Data sending()\Salary below 100000 students.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HESHAN-MACBOOK-.Student]"
+                  connectionManagerRefId="Package.ConnectionManagers[HESHAN-MACBOOK-.Student]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="numeric"
+                      cachedName="id"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].Columns[name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].Columns[mobile]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="mobile"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[mobile]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[mobile]" />
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].Columns[salary]"
+                      cachedDataType="r8"
+                      cachedName="salary"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[salary]" />
+                    <inputColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].Columns[address]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="address"
+                      externalMetadataColumnId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[adress]"
+                      lineageId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output].Columns[address]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="numeric"
+                      name="id"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[adress]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="adress" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[mobile]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="mobile" />
+                    <externalMetadataColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      dataType="r8"
+                      name="salary" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Conditional Data sending()\Salary below 100000 students.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Conditional Data sending()\Salary below 100000 students.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Conditional Data sending()\Salary below 100000 students.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Conditional Data sending()\Salary below 100000 students.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Conditional Data sending().Paths[Case 1]"
+              endId="Package\Conditional Data sending()\Salary below 100000 students.Inputs[OLE DB Destination Input]"
+              name="Case 1"
+              startId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Case 1]" />
+            <path
+              refId="Package\Conditional Data sending().Paths[Case 2]"
+              endId="Package\Conditional Data sending()\Salary above 100000 students.Inputs[OLE DB Destination Input]"
+              name="Case 2"
+              startId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Outputs[Case 2]" />
+            <path
+              refId="Package\Conditional Data sending().Paths[OLE DB Source Output]"
+              endId="Package\Conditional Data sending()\Check salary&lt;100000 or not.Inputs[Conditional Split Input]"
+              name="OLE DB Source Output"
+              startId="Package\Conditional Data sending()\Conditional data sending().Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\Conditional Data sending()"
+          TopLeft="172.000002929143,162.729414046924" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Conditional Data sending()">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="202.4,41.6"
+          Id="Package\Conditional Data sending()\Conditional data sending()"
+          TopLeft="337.142862884366,96.6588248850153" />
+        <NodeLayout
+          Size="212,41.6"
+          Id="Package\Conditional Data sending()\Check salary&lt;100000 or not"
+          TopLeft="328.571434166967,219.623532491902" />
+        <EdgeLayout
+          Id="Package\Conditional Data sending().Paths[OLE DB Source Output]"
+          TopLeft="436.457148525666,138.258824885015">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,81.3647076068864"
+              Start="0,0"
+              End="0,73.8647076068864">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.8647076068864" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\Conditional Data sending()\Salary below 100000 students"
+          TopLeft="178.285717321902,418.447064692091" />
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\Conditional Data sending()\Salary above 100000 students"
+          TopLeft="480.571436755511,415.388241119781" />
+        <EdgeLayout
+          Id="Package\Conditional Data sending().Paths[Case 1]"
+          TopLeft="400.571434166967,261.223532491902">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-112.285716845065,157.22353220019"
+              Start="0,0"
+              End="-112.285716845065,149.72353220019">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.596035496706" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,59.596035496706"
+                    Point2="0,63.596035496706"
+                    Point3="-4,63.596035496706" />
+                  <mssgle:LineSegment
+                    End="-108.285716845065,63.596035496706" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-108.285716845065,63.596035496706"
+                    Point2="-112.285716845065,63.596035496706"
+                    Point3="-112.285716845065,67.596035496706" />
+                  <mssgle:LineSegment
+                    End="-112.285716845065,149.72353220019" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-71.3609443600324,68.596035496706,30.436171875,9.5537109375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Conditional Data sending().Paths[Case 2]"
+          TopLeft="468.571434166967,261.223532491902">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="122.000002588545,154.164708627879"
+              Start="0,0"
+              End="122.000002588545,146.664708627879">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.3587585461084" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,58.3587585461084"
+                    Point2="0,62.3587585461084"
+                    Point3="4,62.3587585461084" />
+                  <mssgle:LineSegment
+                    End="118.000002588545,62.3587585461084" />
+                  <mssgle:CubicBezierSegment
+                    Point1="118.000002588545,62.3587585461084"
+                    Point2="122.000002588545,62.3587585461084"
+                    Point3="122.000002588545,66.3587585461084" />
+                  <mssgle:LineSegment
+                    End="122.000002588545,146.664708627879" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="45.5963684817723,67.3587585461084,30.807265625,9.5732421875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conditional Data sending()\Conditional data sending()">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conditional Data sending()\Salary below 100000 students">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conditional Data sending()\Salary above 100000 students">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

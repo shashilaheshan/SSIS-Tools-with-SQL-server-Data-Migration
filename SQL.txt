@@ -1,0 +1,39 @@
+USE [Student]
+GO
+
+INSERT INTO [dbo].[Student]
+           ([id]
+           ,[name]
+           ,[address]
+           ,[mobile]
+           ,[salary])
+     VALUES
+           (1
+           ,'shashila'
+           ,'nugegoda'
+           ,'0712148820'
+           ,120000.00),  
+		   (2
+           ,'damith'
+           ,'moratuwa'
+           ,'0712148821'
+           ,130000.00),
+		   (3
+           ,'Heshan'
+           ,'Kurunegala'
+           ,'0712148823'
+           ,950000.00),  
+		   (4
+           ,'kusal'
+           ,'horana'
+           ,'0712148824'
+           ,230000.00),
+		   (5
+           ,'janesha'
+           ,'maharagama'
+           ,'0712148825'
+           ,120000.00)
+
+GO
+
+
